@@ -61,6 +61,11 @@ h1 {
   margin-bottom: var(--spacing-lg);
 }
 
+.logo {
+  height: 2em;
+  margin-bottom: -0.5em;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
