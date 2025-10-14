@@ -1,114 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Doppelkopf Score Tracker</title>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.46.0/build/stlite.css"
-  />
-  <style>
-    /* --- General Styles --- */
-    .stApp {
-        background-color: #f0f2f6;
-        color: #333;
-    }
-    .main > div {
-        padding-top: 2rem;
-    }
-    /* --- Remove Sidebar --- */
-    [data-testid="stSidebar"] {
-        display: none;
-    }
-    .stTextInput > div > div > input, .stMultiSelect > div > div, .stNumberInput > div > div > input, .stSelectbox > div > div {
-        background-color: #f0f2f6;
-        color: #333;
-        border: 1px solid #d1d1d1;
-        border-radius: 0.5rem;
-    }
-    /* --- CORRECTED Button Styling --- */
-    .stButton > button {
-        background-color: #007BFF;
-        color: white;
-        border-radius: 0.5rem;
-        border: none;
-        transition: all 0.2s ease;
-        font-weight: bold;
-        width: 100%;
-    }
-    .stButton > button:hover {
-        background-color: #0056b3;
-        color: white;
-    }
-    .stButton > button:active {
-        background-color: #004a99;
-        color: white !important; /* Force text to stay white on click */
-        transform: scale(0.98);
-    }
-    .stButton > button:focus:not(:active) {
-        color: white !important; /* Force text to stay white after click */
-    }
-    h1, h2, h3 {
-        color: #007BFF;
-    }
-    .stTabs [data-baseweb="tab-list"] { gap: 24px; }
-    .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        background-color: transparent;
-        border-radius: 4px 4px 0px 0px;
-        padding: 10px;
-        color: #6c757d;
-        transition: none;
-    }
-    .stTabs [data-baseweb="tab"]:hover {
-        color: #6c757d;
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: #ffffff;
-        color: #007BFF;
-        font-weight: bold;
-        border-bottom: 3px solid #007BFF;
-    }
-     .stTabs [aria-selected="true"]:hover {
-        color: #007BFF;
-    }
-    .stMetric {
-        background-color: #ffffff;
-        border-radius: 0.5rem;
-        padding: 1rem 1.5rem;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        border-left: 5px solid #007BFF;
-    }
-    [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) {
-        flex-wrap: nowrap;
-    }
-    [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) > div {
-        flex: 1;
-        min-width: 0;
-    }
-    .card {
-        background: #ffffff;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 10px;
-        border-left: 5px solid #007BFF;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
-    .card-title { font-size: 1.2em; font-weight: bold; color: #333; margin-bottom: 10px; }
-    .card-content { font-size: 1em; color: #555; }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
-  <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.46.0/build/stlite.js"></script>
-  <script>
-    stlite.mount(
-      {
-        requirements: ["pandas", "plotly"], // Specify dependencies
-        entrypoint: "streamlit_app.py",
-        files: {
-          "streamlit_app.py": `
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -121,6 +10,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
 
 # --- Functions ---
 
@@ -145,6 +35,7 @@ def initialize_game_state():
     if 'dealer_index' not in st.session_state:
         st.session_state.dealer_index = 3
 
+
 def reset_game():
     """Resets the state to start a new game session."""
     st.session_state.game_started = False
@@ -154,6 +45,7 @@ def reset_game():
     st.session_state.solo_player_input = None
     st.session_state.normal_player_input = []
     st.session_state.dealer_index = 3
+
 
 def process_game_submission():
     """Callback to validate, process, and clear the new game form."""
@@ -196,6 +88,7 @@ def process_game_submission():
     st.session_state.solo_player_input = None
     st.session_state.normal_player_input = []
 
+
 @st.cache_data
 def calculate_player_stats(game_history, player_names):
     if not game_history: return pd.DataFrame()
@@ -214,8 +107,11 @@ def calculate_player_stats(game_history, player_names):
     for name, data in player_stats.items():
         win_rate = (data['games_won'] / total_games * 100) if total_games > 0 else 0
         solo_win_rate = (data['solos_won'] / data['solos_played'] * 100) if data['solos_played'] > 0 else 0
-        stats_data.append({'Player': name, 'Games Won': data['games_won'], 'Win Rate (%)': f"{win_rate:.1f}", 'Solos Played': data['solos_played'], 'Solos Won': data['solos_won'], 'Solo Win Rate (%)': f"{solo_win_rate:.1f}"})
+        stats_data.append({'Player': name, 'Games Won': data['games_won'], 'Win Rate (%)': f"{win_rate:.1f}",
+                           'Solos Played': data['solos_played'], 'Solos Won': data['solos_won'],
+                           'Solo Win Rate (%)': f"{solo_win_rate:.1f}"})
     return pd.DataFrame(stats_data).set_index('Player')
+
 
 def generate_round_tables(game_history, scores, player_names):
     """Splits the game history into a list of DataFrames, one for each round."""
@@ -234,7 +130,6 @@ def generate_round_tables(game_history, scores, player_names):
 
         game_data['Points Awarded']=game['Points']
         game_data['Game Type']=game['Type']
-        
         round_games_data.append(game_data)
 
         if game['Type'] == 'Normal':
@@ -253,6 +148,7 @@ def generate_round_tables(game_history, scores, player_names):
 
     return tables
 
+
 # --- App Initialization ---
 initialize_game_state()
 
@@ -264,7 +160,10 @@ if not st.session_state.game_started:
         cols = st.columns(4)
         player_keys = list(st.session_state.players.keys())
         for i, col in enumerate(cols):
-            st.session_state.players[player_keys[i]] = col.text_input(f"Player {i+1}", value=st.session_state.players.get(player_keys[i], ""), key=f'setup_p{i+1}')
+            st.session_state.players[player_keys[i]] = col.text_input(f"Player {i + 1}",
+                                                                      value=st.session_state.players.get(player_keys[i],
+                                                                                                         ""),
+                                                                      key=f'setup_p{i + 1}')
         if st.form_submit_button("Start Game"):
             player_names = [name for name in st.session_state.players.values() if name]
             if len(player_names) != 4 or len(set(player_names)) != 4:
@@ -287,34 +186,39 @@ else:
 
         next_dealer_name = st.session_state.player_names[st.session_state.dealer_index]
         cols = st.columns(4)
-        sorted_players = sorted(st.session_state.player_names, key=lambda p: st.session_state.scores[p][-1] if st.session_state.scores[p] else 0, reverse=True)
+        sorted_players = sorted(st.session_state.player_names,
+                                key=lambda p: st.session_state.scores[p][-1] if st.session_state.scores[p] else 0,
+                                reverse=True)
 
         for player in sorted_players:
             with cols.pop(0):
                 label = f"🃏 {player}" if player == next_dealer_name else player
-                st.metric(label=label, value=st.session_state.scores[player][-1] if st.session_state.scores[player] else 0)
+                st.metric(label=label,
+                          value=st.session_state.scores[player][-1] if st.session_state.scores[player] else 0)
 
         st.header("Game-by-Game History")
         if st.session_state.game_history:
-            round_tables = generate_round_tables(st.session_state.game_history, st.session_state.scores, st.session_state.player_names)
+            round_tables = generate_round_tables(st.session_state.game_history, st.session_state.scores,
+                                                 st.session_state.player_names)
             for i, round_df in enumerate(round_tables):
                 st.subheader(f"Round {i + 1}")
                 st.dataframe(round_df)
         else:
             st.info("No games have been added yet.")
-
+            
         st.divider()
         
         st.header("Add New Game Result")
         st.toggle("Solo Game?", key="is_solo")
         with st.form("new_game_form"):
             if st.session_state.is_solo:
-                st.selectbox("Select the solo player", options=st.session_state.player_names, key="solo_player_input", index=None, placeholder="Select a player...")
+                st.selectbox("Select the solo player", options=st.session_state.player_names, key="solo_player_input",
+                             index=None, placeholder="Select a player...")
             else:
-                st.multiselect("Select 'Re' party (winners)", options=st.session_state.player_names, max_selections=2, key="normal_player_input", placeholder="Select two players...")
+                st.multiselect("Select 'Re' party (winners)", options=st.session_state.player_names, max_selections=2,
+                               key="normal_player_input", placeholder="Select two players...")
             st.number_input("Points for this game", min_value=1, step=1, key="points_input")
             st.form_submit_button("Add Game", on_click=process_game_submission)
-
     with tab2:
         st.header("Score Progression")
         if st.session_state.game_history:
@@ -323,7 +227,9 @@ else:
             colors = ['#007BFF', '#28a745', '#ffc107', '#dc3545']
 
             for i, player in enumerate(st.session_state.player_names):
-                fig.add_trace(go.Scatter(x=game_axis, y=st.session_state.scores[player], mode='lines+markers', name=player, line=dict(width=3, color=colors[i])))
+                fig.add_trace(
+                    go.Scatter(x=game_axis, y=st.session_state.scores[player], mode='lines+markers', name=player,
+                               line=dict(width=3, color=colors[i])))
 
             for i, player in enumerate(st.session_state.player_names):
                 fig.add_annotation(
@@ -336,7 +242,8 @@ else:
             for i, game in enumerate(st.session_state.game_history):
                 if game['Type'] == 'Normal':
                     normal_game_count += 1
-                    if normal_game_count > 0 and normal_game_count % 4 == 0 and (i + 1) < len(st.session_state.game_history):
+                    if normal_game_count > 0 and normal_game_count % 4 == 0 and (i + 1) < len(
+                            st.session_state.game_history):
                         fig.add_vline(x=i + 1.5, line_width=1, line_dash="dash", line_color="lightgray")
 
             fig.update_layout(
@@ -362,15 +269,13 @@ else:
         st.subheader("Card Ranking (Highest to Lowest)")
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown('''<div class="card"><div class="card-title">Trump Cards Hierarchy</div><div class="card-content"><ol>
-            <li>♥️ 10 (Dullen)</li><li>♣️ Q (Alte)</li><li>♠️ Q (Alte)</li><li>♥️ Q (Alte)</li><li>♦️ Q (Alte)</li>
-            <li>♣️ J</li><li>♠️ J</li><li>♥️ J</li><li>♦️ J</li>
-            <li>♦️ A</li><li>♦️ 10</li><li>♦️ K</li></ol>
-            <i>Special Rule: If both ♥️10s are played in the same trick, the second one played wins (unless it's the last trick).</i></div></div>''', unsafe_allow_html=True)
+            st.markdown(
+                '''<div class="card"><div class="card-title">Trump Cards Hierarchy</div><div class="card-content"><ol><li>♥️ 10 (Dullen)</li><li>♣️ Q (Alte)</li><li>♠️ Q (Alte)</li><li>♥️ Q (Alte)</li><li>♦️ Q (Alte)</li><li>♣️ J</li><li>♠️ J</li><li>♥️ J</li><li>♦️ J</li><li>♦️ A</li><li>♦️ 10</li><li>♦️ K</li></ol><i>Special Rule: If both ♥️10s are played in the same trick, the second one played wins (unless it's the last trick).</i></div></div>''',
+                unsafe_allow_html=True)
         with col2:
-            st.markdown('''<div class="card"><div class="card-title">Non-Trump Suit Ranking</div><div class="card-content">For any non-trump suit (♣️, ♠️, ♥️):<ol>
-            <li>Ace (A)</li><li>Ten (10)</li><li>King (K)</li></ol>
-            <br><i>If two identical cards are played, the first one wins.</i></div></div>''', unsafe_allow_html=True)
+            st.markdown(
+                '''<div class="card"><div class="card-title">Non-Trump Suit Ranking</div><div class="card-content">For any non-trump suit (♣️, ♠️, ♥️):<ol><li>Ace (A)</li><li>Ten (10)</li><li>King (K)</li></ol><br><i>If two identical cards are played, the first one wins.</i></div></div>''',
+                unsafe_allow_html=True)
         st.subheader("Reservation Priority (Vorbehalt)")
         st.markdown('''<div class="card"><div class="card-title">Determining What is Played</div><div class="card-content">If one or more players announce a reservation, the priority is:<ol>
             <li><b>Misdeal / Throwing In (highest priority):</b> A player can declare a misdeal before the first card is played if they have:
@@ -383,13 +288,3 @@ else:
             </li>
             <li><b>Hochzeit (Wedding):</b> Outranks any Solo.</li>
             <li><b>Solo</b></li></ol></div></div>''', unsafe_allow_html=True)
-
-`,
-        },
-      },
-      document.getElementById("root")
-    );
-  </script>
-</body>
-</html>
-

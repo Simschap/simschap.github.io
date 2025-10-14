@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Doppelkopf Score Tracker</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.46.0/build/stlite.css"
+  />
+  <style>
+    /* --- General Styles --- */
+    .stApp {
+        background-color: #f0f2f6;
+        color: #333;
+    }
+    .main > div {
+        padding-top: 2rem;
+    }
+    /* --- Remove Sidebar --- */
+    [data-testid="stSidebar"] {
+        display: none;
+    }
+    .stTextInput > div > div > input, .stMultiSelect > div > div, .stNumberInput > div > div > input, .stSelectbox > div > div {
+        background-color: #f0f2f6;
+        color: #333;
+        border: 1px solid #d1d1d1;
+        border-radius: 0.5rem;
+    }
+    .stButton > button {
+        background-color: #007BFF;
+        color: white;
+        border-radius: 0.5rem;
+        border: none;
+        transition: all 0.2s ease;
+        font-weight: bold;
+        width: 100%;
+    }
+    .stButton > button:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+    .stButton > button:active, .stButton > button:focus:not(:active) {
+        background-color: #004a99;
+        color: white !important;
+        transform: scale(0.98);
+    }
+    h1, h2, h3 {
+        color: #007BFF;
+    }
+    .stTabs [data-baseweb="tab-list"] { gap: 24px; }
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        background-color: transparent;
+        border-radius: 4px 4px 0px 0px;
+        padding: 10px;
+        color: #6c757d;
+        transition: none;
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        color: #6c757d;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #ffffff;
+        color: #007BFF;
+        font-weight: bold;
+        border-bottom: 3px solid #007BFF;
+    }
+     .stTabs [aria-selected="true"]:hover {
+        color: #007BFF;
+    }
+    .stMetric {
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        border-left: 5px solid #007BFF;
+    }
+    [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) {
+        flex-wrap: nowrap;
+    }
+    [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) > div {
+        flex: 1;
+        min-width: 0;
+    }
+    .card {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 10px;
+        border-left: 5px solid #007BFF;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .card-title { font-size: 1.2em; font-weight: bold; color: #333; margin-bottom: 10px; }
+    .card-content { font-size: 1em; color: #555; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.46.0/build/stlite.js"></script>
+  <script>
+    stlite.mount(
+      {
+        requirements: ["pandas", "plotly"],
+        entrypoint: "streamlit_app.py",
+        files: {
+          "streamlit_app.py": `{PYTHON_SCRIPT_CONTENT}`,
+        },
+      },
+      document.getElementById("root")
+    );
+  </script>
+</body>
+</html>
+
