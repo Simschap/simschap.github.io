@@ -9,31 +9,31 @@ let editingRoundIndex = undefined;
 export function initEvents() {
     // Player name inputs
     for (let i = 0; i < 4; i++) {
-        const playerInput = document.getElementById("player" + i);
+        const playerInput = document.getElementById('player' + i);
 
-        playerInput.addEventListener("focus", () => {
+        playerInput.addEventListener('focus', () => {
             if (playerInput.value === playerInput.placeholder) {
-                playerInput.value = "";
+                playerInput.value = '';
             }
         });
 
-        playerInput.addEventListener("blur", () => {
-            if (playerInput.value.trim() === "") {
+        playerInput.addEventListener('blur', () => {
+            if (playerInput.value.trim() === '') {
                 playerInput.value = playerInput.placeholder;
             }
         });
 
-        playerInput.addEventListener("input", () => {
+        playerInput.addEventListener('input', () => {
             updatePlayerName(i, playerInput.value.trim() || `Player ${i + 1}`);
         });
     }
 
     // Global buttons
-    document.getElementById("resetGame").addEventListener("click", handleResetGame);
-    document.getElementById("exportGame").addEventListener("click", () => exportGame(getGameState()));
-    document.getElementById("importGame").addEventListener("click", importGame);
-    document.getElementById("csvFileInput").addEventListener("change", handleCSVImport);
-    document.getElementById("toggleGraph").addEventListener("click", toggleGraph);
+    document.getElementById('resetGame').addEventListener('click', handleResetGame);
+    document.getElementById('exportGame').addEventListener('click', () => exportGame(getGameState()));
+    document.getElementById('importGame').addEventListener('click', importGame);
+    document.getElementById('csvFileInput').addEventListener('change', handleCSVImport);
+    document.getElementById('toggleGraph').addEventListener('click', toggleGraph);
 
     // Modal events
     document.getElementById('modalAddRound').addEventListener('click', handleAddRoundFromModal);
@@ -64,7 +64,7 @@ export function initEvents() {
     });
 
     // Table event delegation for edit buttons
-    document.querySelector("#scoreTable tbody").addEventListener("click", (e) => {
+    document.querySelector('#scoreTable tbody').addEventListener('click', (e) => {
         // Check if we clicked on the "Add Round" button first
         const addBtn = e.target.closest("button[data-action='open-add-round']");
         if (addBtn) {
@@ -74,7 +74,7 @@ export function initEvents() {
         }
 
         // Check if we clicked on a row
-        const tr = e.target.closest("tr.clickable-row");
+        const tr = e.target.closest('tr.clickable-row');
         if (tr && tr.dataset.index !== undefined) {
             const index = parseInt(tr.dataset.index, 10);
             const label = tr.dataset.label;
@@ -84,13 +84,13 @@ export function initEvents() {
 }
 
 function handleResetGame() {
-    showConfirm("Are you sure you want to reset all scores? This action cannot be undone.", () => {
+    showConfirm('Are you sure you want to reset all scores? This action cannot be undone.', () => {
         resetGameState();
         renderTable();
-        showToast("Game has been reset successfully.", "success");
+        showToast('Game has been reset successfully.', 'success');
 
-        const graphContainer = document.getElementById("graphContainer");
-        if (graphContainer.style.display !== "none") {
+        const graphContainer = document.getElementById('graphContainer');
+        if (graphContainer.style.display !== 'none') {
             updateGraph();
         }
     });
@@ -104,11 +104,11 @@ function handleEditRound(index, label) {
 }
 
 function handleAddRoundFromModal() {
-    let points = parseInt(document.getElementById("modalRoundPoints").value, 10);
-    let solo = document.getElementById("modalSoloRound").checked;
+    let points = parseInt(document.getElementById('modalRoundPoints').value, 10);
+    let solo = document.getElementById('modalSoloRound').checked;
 
     const modalWinnerButtons = getModalWinnerButtons();
-    let winners = modalWinnerButtons.map((btn) => btn.classList.contains("active"));
+    let winners = modalWinnerButtons.map((btn) => btn.classList.contains('active'));
 
     const validation = validateRoundInput(points, winners, solo);
     if (!validation.valid) {
@@ -128,8 +128,8 @@ function handleAddRoundFromModal() {
     closeAddRoundModal();
     renderTable();
 
-    const graphContainer = document.getElementById("graphContainer");
-    if (graphContainer.style.display !== "none") {
+    const graphContainer = document.getElementById('graphContainer');
+    if (graphContainer.style.display !== 'none') {
         updateGraph();
     }
 }
@@ -138,7 +138,7 @@ function importGame() {
     const gameState = getGameState();
     if (gameState.rounds.length > 0) {
         showConfirm(
-            "Importing a CSV file will completely replace your current scoreboard. All existing rounds will be lost. Are you sure you want to continue?",
+            'Importing a CSV file will completely replace your current scoreboard. All existing rounds will be lost. Are you sure you want to continue?',
             () => {
                 document.getElementById('csvFileInput').click();
             }
@@ -194,8 +194,8 @@ function performImport(parsedData) {
 
     renderTable();
 
-    const graphContainer = document.getElementById("graphContainer");
-    if (graphContainer.style.display !== "none") {
+    const graphContainer = document.getElementById('graphContainer');
+    if (graphContainer.style.display !== 'none') {
         updateGraph();
     }
 
