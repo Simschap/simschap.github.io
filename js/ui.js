@@ -43,7 +43,11 @@ export function renderTable() {
 
     gameState.rounds.forEach((round, index) => {
         let tr = document.createElement("tr");
+        tr.dataset.index = index;
+        tr.classList.add("clickable-row");
+
         let roundLabel = round.solo ? "S" : roundCounter++;
+        tr.dataset.label = roundLabel;
 
         let rowHtml = `<td>${roundLabel}</td>`;
         round.scores.forEach((score, i) => {
@@ -53,8 +57,6 @@ export function renderTable() {
         });
 
         rowHtml += `<td>${round.points}</td>`;
-        // Note: onclick is replaced by event delegation in events.js, but we need to add a data attribute or class to identify the button
-        rowHtml += `<td><button data-action="edit-round" data-index="${index}" aria-label="Edit round" class="icon-button">${SVG_PENCIL}</button></td>`;
         tr.innerHTML = rowHtml;
 
         if (!round.solo && roundCounter > 1 && (roundCounter - 1) % 4 === 0) {
@@ -83,7 +85,7 @@ export function renderTable() {
     tbody.appendChild(addRow);
 }
 
-export function openAddRoundModal(isEditMode = false, roundData = null) {
+export function openAddRoundModal(isEditMode = false, roundData = null, roundLabel = null) {
     const modal = document.getElementById('addRoundModal');
     modal.style.display = 'block';
 
@@ -91,7 +93,7 @@ export function openAddRoundModal(isEditMode = false, roundData = null) {
     const modalButton = document.getElementById('modalAddRound');
 
     if (isEditMode) {
-        modalTitle.textContent = 'Edit Round';
+        modalTitle.textContent = roundLabel ? `Edit Round ${roundLabel}` : 'Edit Round';
         modalButton.textContent = 'Save Edits';
     } else {
         modalTitle.textContent = 'Add Round';

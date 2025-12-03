@@ -142,8 +142,13 @@ thead input:focus {
 }
 
 /* Color utility classes */
-.positive { color: var(--color-primary); }
-.negative { color: var(--color-secondary); }
+.positive {
+  color: var(--color-primary);
+}
+
+.negative {
+  color: var(--color-secondary);
+}
 
 /* Layout components */
 .form-grid {
@@ -184,8 +189,10 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
-  -moz-appearance: textfield; /* Firefox */
+  -moz-appearance: textfield;
+  /* Firefox */
   appearance: textfield;
 }
 
@@ -361,9 +368,17 @@ input[type="number"] {
   transform: translateX(0);
 }
 
-.toast.success { background: var(--color-success); }
-.toast.warning { background: var(--color-warning); }
-.toast.info { background: var(--color-info); }
+.toast.success {
+  background: var(--color-success);
+}
+
+.toast.warning {
+  background: var(--color-warning);
+}
+
+.toast.info {
+  background: var(--color-info);
+}
 
 /* Add round button styles */
 .add-round-row td {
@@ -449,38 +464,43 @@ input[type="number"] {
     --spacing-lg: 1rem;
     --spacing-xl: 1.5rem;
   }
-  
+
   body {
-    font-size: 16px; /* Standard readable size, prevents iOS zoom */
+    font-size: 16px;
+    /* Standard readable size, prevents iOS zoom */
     margin: var(--spacing-md) auto;
     padding: 0 var(--spacing-sm);
   }
-  
+
   h1 {
     font-size: 24px;
     margin-bottom: var(--spacing-md);
   }
-  
+
   h2 {
     font-size: 20px;
     margin-bottom: var(--spacing-sm);
   }
-  
+
   /* Table Optimizations */
   .table-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    margin-right: -0.5rem; /* Allow scroll to edge */
+    margin-right: -0.5rem;
+    /* Allow scroll to edge */
     padding-right: 0.5rem;
-    box-shadow: inset -10px 0 10px -10px rgba(0,0,0,0.1); /* Hint at scroll */
+    box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, 0.1);
+    /* Hint at scroll */
   }
 
   table {
     font-size: 14px;
   }
 
-  th, td {
-    padding: 8px 4px; /* Dense padding */
+  th,
+  td {
+    padding: 8px 4px;
+    /* Dense padding */
     min-width: 40px;
   }
 
@@ -495,7 +515,7 @@ input[type="number"] {
     width: 40px;
     min-width: 40px;
   }
-  
+
   /* Player name inputs */
   thead input {
     font-size: 14px;
@@ -506,8 +526,10 @@ input[type="number"] {
 
   /* Controls & Buttons */
   button {
-    padding: 10px 16px; /* Touch friendly */
-    min-height: 44px; /* Minimum touch target */
+    padding: 10px 16px;
+    /* Touch friendly */
+    min-height: 44px;
+    /* Minimum touch target */
     font-size: 16px;
     margin-bottom: var(--spacing-sm);
   }
@@ -518,9 +540,10 @@ input[type="number"] {
     flex-wrap: wrap;
     gap: var(--spacing-sm);
   }
-  
+
   #controls button {
-    flex: 1 1 auto; /* Grow to fill space */
+    flex: 1 1 auto;
+    /* Grow to fill space */
     margin-right: 0;
   }
 
@@ -544,7 +567,7 @@ input[type="number"] {
     width: 50px;
     font-size: 18px;
   }
-  
+
   .points-control button {
     width: 44px;
     height: 44px;
@@ -561,7 +584,7 @@ input[type="number"] {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
   }
-  
+
   .winner-button {
     width: 100%;
     margin: 0;
@@ -575,7 +598,7 @@ input[type="number"] {
     top: 10px;
     width: auto;
   }
-  
+
   .toast {
     max-width: none;
     width: 100%;
@@ -637,7 +660,7 @@ input[type="number"] {
     overflow-x: auto;
     overflow-y: visible;
   }
-  
+
   .score-graph svg {
     min-width: 400px;
   }
@@ -664,4 +687,21 @@ input[type="number"] {
 .page-footer a:hover {
   color: var(--color-text);
   text-decoration: underline;
+}
+
+/* Clickable rows */
+.clickable-row {
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.clickable-row:hover td {
+  background-color: #e8f5e8 !important;
+  /* Light green highlight */
+  cursor: pointer;
+}
+
+.clickable-row td {
+  position: relative;
+  transition: background-color var(--transition);
 }

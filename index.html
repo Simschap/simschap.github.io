@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doko Rocks</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg" />
-    <link rel="stylesheet" href="mystyle.css" />
-  </head>
-  <body>
-    <!-- Skip Navigation -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <a href="#scoreboard" class="skip-link">Skip to scoreboard</a>
-    <a href="#controls" class="skip-link">Skip to controls</a>
-    
-    <h1 style="margin: 0;">
-      <img src="logo.svg" alt="Logo" class="logo"/> Doko Rocks
-    </h1>
 
-    <main id="main-content">
-      <section class="form-section" id="scoreboard">
-        <h2>Scoreboard</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doko Rocks</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="stylesheet" href="mystyle.css" />
+</head>
+
+<body>
+  <!-- Skip Navigation -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#scoreboard" class="skip-link">Skip to scoreboard</a>
+  <a href="#controls" class="skip-link">Skip to controls</a>
+
+  <h1 style="margin: 0;">
+    <img src="logo.svg" alt="Logo" class="logo" /> Doko Rocks
+  </h1>
+
+  <main id="main-content">
+    <section class="form-section" id="scoreboard">
+      <h2>Scoreboard</h2>
       <div class="table-container">
         <table id="scoreTable" role="table" aria-label="Doppelkopf scoreboard">
           <thead>
@@ -30,7 +32,6 @@
               <th scope="col"><input type="text" id="player2" placeholder="Player 3" aria-label="Player 3 name" /></th>
               <th scope="col"><input type="text" id="player3" placeholder="Player 4" aria-label="Player 4 name" /></th>
               <th class="points-header" scope="col">Round Points</th>
-              <th scope="col" aria-label="Actions">Actions</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -39,107 +40,95 @@
     </section>
 
 
-      <section class="form-section" id="controls">
-        <h2>Controls</h2>
+    <section class="form-section" id="controls">
+      <h2>Controls</h2>
       <button type="button" id="resetGame">Reset</button>
       <button type="button" id="exportGame">Export</button>
       <button type="button" id="importGame">Import</button>
       <input type="file" id="csvFileInput" accept=".csv" style="display: none;" />
     </section>
 
-      <section class="form-section">
-        <h2>
-          Nerd mode
-          <button type="button" id="toggleGraph" class="toggle-button" aria-label="Toggle score graph">
-            <span class="toggle-icon">▼</span>
-          </button>
-        </h2>
-        <div id="graphContainer" class="graph-container" style="display: none;">
-          <div id="scoreGraph" class="score-graph"></div>
-        </div>
-      </section>
-    </main>
+    <section class="form-section">
+      <h2>
+        Nerd mode
+        <button type="button" id="toggleGraph" class="toggle-button" aria-label="Toggle score graph">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </h2>
+      <div id="graphContainer" class="graph-container" style="display: none;">
+        <div id="scoreGraph" class="score-graph"></div>
+      </div>
+    </section>
+  </main>
 
-    <!-- Add Round Modal -->
-    <div id="addRoundModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Add Round</h2>
-          <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <fieldset class="form-grid" aria-label="Round points">
-            <legend>Round Points</legend>
-            <div class="points-control">
-              <button type="button" id="modalDecreasePoints" aria-label="Decrease points">
-                −
-              </button>
-              <input
-                type="number"
-                id="modalRoundPoints"
-                value="1"
-                min="0"
-                aria-labelledby="roundPointsLabel"
-              />
-              <button type="button" id="modalIncreasePoints" aria-label="Increase points">
-                +
-              </button>
-            </div>
-          </fieldset>
+  <!-- Add Round Modal -->
+  <div id="addRoundModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add Round</h2>
+        <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <fieldset class="form-grid" aria-label="Round points">
+          <legend>Round Points</legend>
+          <div class="points-control">
+            <button type="button" id="modalDecreasePoints" aria-label="Decrease points">
+              −
+            </button>
+            <input type="number" id="modalRoundPoints" value="1" min="0" aria-labelledby="roundPointsLabel" />
+            <button type="button" id="modalIncreasePoints" aria-label="Increase points">
+              +
+            </button>
+          </div>
+        </fieldset>
 
-          <fieldset
-            class="form-grid"
-            id="modalWinnerButtonsContainer"
-            aria-label="Winner selection"
-          >
-            <legend>Winner Selection</legend>
-            <!-- Winner buttons injected by JavaScript -->
-          </fieldset>
+        <fieldset class="form-grid" id="modalWinnerButtonsContainer" aria-label="Winner selection">
+          <legend>Winner Selection</legend>
+          <!-- Winner buttons injected by JavaScript -->
+        </fieldset>
 
-          <fieldset
-            class="form-grid"
-            id="modalConditionButtonsContainer"
-            aria-label="Special conditions"
-          >
-            <legend>Special Conditions</legend>
-            <label>
-              <input type="checkbox" id="modalSoloRound" />
-              Solo
-            </label>
-          </fieldset>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="modalAddRound" class="modal-add-button">Add Round</button>
-          <button type="button" class="modal-cancel-button">Cancel</button>
-        </div>
+        <fieldset class="form-grid" id="modalConditionButtonsContainer" aria-label="Special conditions">
+          <legend>Special Conditions</legend>
+          <label>
+            <input type="checkbox" id="modalSoloRound" />
+            Solo
+          </label>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="modalAddRound" class="modal-add-button">Add Round</button>
+        <button type="button" class="modal-cancel-button">Cancel</button>
       </div>
     </div>
+  </div>
 
-    <!-- Toast notification container -->
-    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
-    
+  <!-- Toast notification container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Confirm Action</h2>
-          <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p id="confirmMessage">Are you sure?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="confirmYes" class="modal-confirm-button">Yes</button>
-          <button type="button" id="confirmNo" class="modal-cancel-button">Cancel</button>
-        </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Confirm Action</h2>
+        <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="confirmYes" class="modal-confirm-button">Yes</button>
+        <button type="button" id="confirmNo" class="modal-cancel-button">Cancel</button>
       </div>
     </div>
+  </div>
 
-    <script type="module" src="js/main.js"></script>
-    
-    <footer class="page-footer">
-      <p>Have feedback? <a href="https://github.com/Simschap/simschap.github.io/issues" target="_blank" rel="noopener noreferrer">Let us know</a></p>
-    </footer>
-  </body>
+  <script type="module" src="js/main.js"></script>
+
+  <footer class="page-footer">
+    <p>Have feedback? <a href="https://github.com/Simschap/simschap.github.io/issues" target="_blank"
+        rel="noopener noreferrer">Let us know</a></p>
+  </footer>
+</body>
+
 </html>

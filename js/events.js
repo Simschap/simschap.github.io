@@ -65,15 +65,20 @@ export function initEvents() {
 
     // Table event delegation for edit buttons
     document.querySelector("#scoreTable tbody").addEventListener("click", (e) => {
-        const btn = e.target.closest("button");
-        if (!btn) return;
-
-        if (btn.dataset.action === "edit-round") {
-            const index = parseInt(btn.dataset.index, 10);
-            handleEditRound(index);
-        } else if (btn.dataset.action === "open-add-round") {
+        // Check if we clicked on the "Add Round" button first
+        const addBtn = e.target.closest("button[data-action='open-add-round']");
+        if (addBtn) {
             editingRoundIndex = undefined;
             openAddRoundModal(false);
+            return;
+        }
+
+        // Check if we clicked on a row
+        const tr = e.target.closest("tr.clickable-row");
+        if (tr && tr.dataset.index !== undefined) {
+            const index = parseInt(tr.dataset.index, 10);
+            const label = tr.dataset.label;
+            handleEditRound(index, label);
         }
     });
 }
@@ -91,11 +96,11 @@ function handleResetGame() {
     });
 }
 
-function handleEditRound(index) {
+function handleEditRound(index, label) {
     const gameState = getGameState();
     const round = gameState.rounds[index];
     editingRoundIndex = index;
-    openAddRoundModal(true, round);
+    openAddRoundModal(true, round, label);
 }
 
 function handleAddRoundFromModal() {
