@@ -855,12 +855,16 @@ input[type="number"] {
   color: #2c3e50;
 }
 
-.suit-group {
+.suit-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  font-size: 1.1em;
+  gap: 4px;
 }
 
 .rules-list-ordered {
@@ -907,10 +911,6 @@ input[type="number"] {
   overflow-y: auto;
   padding: var(--spacing-md);
   background: var(--color-background-lighter);
-}
-
-color: var(--color-text);
-text-decoration: underline;
 }
 
 /* Clickable rows */
