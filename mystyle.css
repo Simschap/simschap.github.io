@@ -618,19 +618,18 @@ input[type="number"] {
     border-color: #999;
   }
 
-  /* Add Round Button - Cleaner look */
+  /* Add Round Button - Match desktop style */
   .add-round-button {
     width: 100%;
     justify-content: center;
-    background: transparent;
-    border: 1px dashed var(--color-primary);
-    color: var(--color-primary);
+    background: #e8f5e8;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
     font-weight: 600;
   }
 
   .add-round-button:hover {
-    background: #f0fdf4;
-    border-style: solid;
+    background: #c8e6c9;
   }
 
   /* Modal Improvements */
