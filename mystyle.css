@@ -440,323 +440,146 @@ input[type="number"] {
 }
 
 /* Mobile improvements - More aggressive scaling */
+/* Mobile improvements - Refined for usability */
 @media (max-width: 768px) {
   :root {
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 0.75rem;
-    --spacing-md: 1.5rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 2.5rem;
-    --border-radius: 12px;
-    --border-radius-large: 16px;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 0.75rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
   }
   
   body {
-    font-size: 20px;
-    margin: var(--spacing-sm) auto;
+    font-size: 16px; /* Standard readable size, prevents iOS zoom */
+    margin: var(--spacing-md) auto;
     padding: 0 var(--spacing-sm);
-    line-height: 1.6;
   }
   
   h1 {
-    font-size: 32px;
-    margin-bottom: var(--spacing-lg);
-    line-height: 1.2;
+    font-size: 24px;
+    margin-bottom: var(--spacing-md);
   }
   
   h2 {
-    font-size: 26px;
-    margin-bottom: var(--spacing-md);
-  }
-  
-  /* Much larger touch-friendly buttons */
-  button {
-    padding: var(--spacing-md) var(--spacing-xl);
-    font-size: 22px;
-    border-radius: var(--border-radius);
-    min-height: 56px;
-    font-weight: 500;
-  }
-  
-  .winner-button {
-    padding: var(--spacing-md) var(--spacing-lg);
     font-size: 20px;
-    border-radius: var(--border-radius);
-    min-height: 56px;
-    font-weight: 500;
-  }
-  
-  /* Much larger table cells */
-  th, td {
-    padding: var(--spacing-md) var(--spacing-sm);
-    font-size: 20px;
-    min-height: 60px;
-  }
-  
-  /* Larger form inputs */
-  .points-control input {
-    width: 140px;
-    font-size: 24px;
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius);
-    min-height: 56px;
-    border: 2px solid var(--color-border);
-  }
-  
-  thead input {
-    font-size: 20px;
-    padding: var(--spacing-md) var(--spacing-sm);
-    min-height: 56px;
-  }
-  
-  /* Improved form spacing */
-  .form-section {
-    margin-top: var(--spacing-lg);
-    padding-top: var(--spacing-lg);
-  }
-  
-  .form-grid {
-    gap: var(--spacing-lg);
-    margin: var(--spacing-lg) 0;
-  }
-  
-  /* Much more prominent legends */
-  legend {
-    font-size: 24px;
-    font-weight: bold;
-    padding: 0 var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-  }
-  
-  /* Much larger checkboxes */
-  .form-grid input[type="checkbox"] {
-    transform: scale(2);
-    margin-right: var(--spacing-md);
-  }
-  
-  .form-grid label {
-    font-size: 22px;
-    font-weight: 500;
-  }
-  
-  /* Larger icon buttons */
-  .icon-button {
-    padding: var(--spacing-md);
-    font-size: 24px;
-    min-width: 56px;
-    min-height: 56px;
-  }
-  
-  /* Mobile add-round button */
-  .add-round-button {
-    padding: var(--spacing-lg) var(--spacing-xl);
-    font-size: 22px;
-    min-height: 60px;
-    font-weight: 600;
-  }
-  
-  .add-round-row td {
-    padding: var(--spacing-lg);
-  }
-  
-  /* Mobile empty state */
-  .empty-state {
-    padding: var(--spacing-xl) var(--spacing-lg) !important;
-  }
-  
-  .empty-message p {
-    font-size: 20px;
-    margin-bottom: var(--spacing-xl);
-    line-height: 1.5;
-  }
-  
-  .add-round-button.prominent {
-    padding: var(--spacing-lg) var(--spacing-xl);
-    font-size: 22px;
-    min-height: 64px;
-    font-weight: 600;
-  }
-  
-  /* Modal improvements for mobile */
-  .modal-content {
-    width: 90%;
-    margin: 5% auto;
-    max-height: 85vh;
-    max-width: 400px;
-  }
-  
-  .modal-header {
-    padding: var(--spacing-md) var(--spacing-lg);
-  }
-  
-  .modal-header h2 {
-    font-size: 22px;
-  }
-  
-  .modal-body {
-    padding: var(--spacing-lg);
-    max-height: 60vh;
-    overflow-y: auto;
-  }
-  
-  .modal-footer {
-    padding: var(--spacing-md) var(--spacing-lg);
-    gap: var(--spacing-md);
-  }
-  
-  .modal-add-button,
-  .modal-cancel-button,
-  .modal-confirm-button {
-    padding: var(--spacing-sm) var(--spacing-lg);
-    font-size: 16px;
-    min-height: 44px;
-    font-weight: 500;
-  }
-  
-  /* Mobile modal form improvements */
-  .modal .form-grid {
-    margin-bottom: var(--spacing-md);
-  }
-  
-  .modal .form-grid legend {
-    font-size: 16px;
     margin-bottom: var(--spacing-sm);
   }
   
-  .modal .points-control {
-    gap: var(--spacing-sm);
+  /* Table Optimizations */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-right: -0.5rem; /* Allow scroll to edge */
+    padding-right: 0.5rem;
+    box-shadow: inset -10px 0 10px -10px rgba(0,0,0,0.1); /* Hint at scroll */
   }
-  
-  .modal .points-control button {
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
-  }
-  
-  .modal .points-control input {
-    width: 80px;
-    font-size: 16px;
-    padding: var(--spacing-xs);
-  }
-  
-  .modal .winner-buttons {
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
-  }
-  
-  .modal .winner-buttons button {
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 14px;
-    min-height: 40px;
-  }
-  
-  .modal .form-grid input[type="checkbox"] {
-    transform: scale(1.5);
-    margin-right: var(--spacing-sm);
-  }
-  
-  .modal .form-grid label {
-    font-size: 16px;
-  }
-  
-  /* Toast improvements */
-  .toast {
-    padding: var(--spacing-lg) var(--spacing-xl);
-    font-size: 18px;
-    max-width: 90%;
-    margin: 0 var(--spacing-sm) var(--spacing-md) 0;
-  }
-  
-  .toast-container {
-    top: var(--spacing-sm);
-    right: var(--spacing-sm);
-    left: var(--spacing-sm);
-  }
-  
-  /* Table improvements for mobile */
+
   table {
-    font-size: 18px;
+    font-size: 14px;
   }
-  
-  /* Narrow first column and abbreviate headers on mobile */
-  .round-header {
-    width: 60px;
-    min-width: 60px;
-    font-size: 0;
+
+  th, td {
+    padding: 8px 4px; /* Dense padding */
+    min-width: 40px;
   }
-  
-  .round-header::after {
-    content: "";
-    font-size: 16px;
-  }
-  
-  .points-header {
-    font-size: 0;
-  }
-  
-  .points-header::after {
-    content: "Pts.";
-    font-size: 16px;
-  }
-  
-  /* Make player name columns wider to show full names */
-  th:nth-child(2),
-  th:nth-child(3),
-  th:nth-child(4),
-  th:nth-child(5),
-  td:nth-child(2),
-  td:nth-child(3),
-  td:nth-child(4),
-  td:nth-child(5) {
-    min-width: 90px;
-    width: auto;
-    max-width: 120px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  /* Ensure player name inputs are readable */
-  th:nth-child(2) input,
-  th:nth-child(3) input,
-  th:nth-child(4) input,
-  th:nth-child(5) input {
-    font-size: 16px;
-    padding: var(--spacing-sm);
-    min-width: 80px;
-  }
-  
-  /* Optimize last two columns for mobile */
-  th:nth-child(6),
-  td:nth-child(6),
-  th:nth-child(7),
-  td:nth-child(7) {
-    width: 70px;
-    min-width: 70px;
-    max-width: 70px;
-  }
-  
-  /* Make table more mobile-friendly */
+
+  /* Sticky first column with shadow */
   th:first-child,
   td:first-child {
     position: sticky;
     left: 0;
-    background: var(--color-background-light);
-    z-index: 1;
-    width: 60px;
+    background: var(--color-background-white);
+    z-index: 2;
+    border-right: 2px solid var(--color-border-light);
+    width: 40px;
+    min-width: 40px;
+  }
+  
+  /* Player name inputs */
+  thead input {
+    font-size: 14px;
+    padding: 4px;
+    width: 100%;
     min-width: 60px;
   }
-  
-  /* Horizontal scroll for table on very small screens */
-  .table-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+
+  /* Controls & Buttons */
+  button {
+    padding: 10px 16px; /* Touch friendly */
+    min-height: 44px; /* Minimum touch target */
+    font-size: 16px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  /* Stack controls */
+  #controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
   }
   
-  /* Better touch targets for small elements */
-  .modal-close {
-    width: 3rem;
-    height: 3rem;
-    font-size: 2.5rem;
+  #controls button {
+    flex: 1 1 auto; /* Grow to fill space */
+    margin-right: 0;
+  }
+
+  /* Modal Improvements */
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+    max-height: 90vh;
+  }
+
+  .modal-body {
+    padding: var(--spacing-md);
+  }
+
+  .form-grid {
+    gap: var(--spacing-sm);
+  }
+
+  /* Points control */
+  .points-control input {
+    width: 50px;
+    font-size: 18px;
+  }
+  
+  .points-control button {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  /* Winner buttons grid */
+  #modalWinnerButtonsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .winner-button {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+  }
+
+  /* Toast */
+  .toast-container {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    width: auto;
+  }
+  
+  .toast {
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
