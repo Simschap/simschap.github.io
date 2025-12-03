@@ -750,8 +750,29 @@ input[type="number"] {
   box-shadow: var(--shadow-sm);
 }
 
+.graph-legend {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.graph-legend svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.graph-scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
 .score-graph {
   width: 100%;
+  min-width: 400px;
   height: 300px;
   overflow: visible;
 }
@@ -764,14 +785,22 @@ input[type="number"] {
 
 /* Graph responsive design */
 @media (max-width: 768px) {
+  .graph-legend {
+    padding: var(--spacing-sm);
+  }
+
+  .graph-legend svg {
+    width: 100%;
+    max-width: 350px;
+  }
+
   .score-graph {
     height: 250px;
-    overflow-x: auto;
-    overflow-y: visible;
+    min-width: 500px;
   }
 
   .score-graph svg {
-    min-width: 400px;
+    min-width: 500px;
   }
 }
 
