@@ -1,7 +1,7 @@
 import { showToast, showConfirm, parseCSV, validateImportedData, exportGame } from './utils.js';
 import { getGameState, updatePlayerName, addRound, updateRound, resetGameState, setPlayers, setRounds } from './state.js';
 import { calculateScores, validateRoundInput } from './logic.js';
-import { renderTable, openAddRoundModal, closeAddRoundModal, getModalWinnerButtons } from './ui.js';
+import { renderTable, openAddRoundModal, closeAddRoundModal, getModalWinnerButtons, openRulesModal, closeRulesModal } from './ui.js';
 import { toggleGraph, updateGraph } from './graph.js';
 
 let editingRoundIndex = undefined;
@@ -37,8 +37,8 @@ export function initEvents() {
 
     // Modal events
     document.getElementById('modalAddRound').addEventListener('click', handleAddRoundFromModal);
-    document.querySelector('.modal-cancel-button').addEventListener('click', closeAddRoundModal);
-    document.querySelector('.modal-close').addEventListener('click', closeAddRoundModal);
+
+    // Close buttons are handled generically below
 
     document.getElementById('addRoundModal').addEventListener('click', (e) => {
         if (e.target.id === 'addRoundModal') {
@@ -49,6 +49,38 @@ export function initEvents() {
     document.getElementById('confirmModal').addEventListener('click', (e) => {
         if (e.target.id === 'confirmModal') {
             document.getElementById('confirmModal').style.display = 'none';
+        }
+    });
+
+    // Rules Modal events
+    document.getElementById('showRules').addEventListener('click', openRulesModal);
+
+    // Use delegation or specific selection for rules modal close button
+    // Since we have multiple .modal-close buttons, we should be careful.
+    // The previous code: document.querySelector('.modal-close').addEventListener... only selects the FIRST one.
+    // We need to handle all close buttons or specific ones.
+
+    // Let's attach to all close buttons
+    document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', () => {
+            closeAddRoundModal();
+            closeRulesModal();
+            document.getElementById('confirmModal').style.display = 'none';
+        });
+    });
+
+    // And cancel buttons
+    document.querySelectorAll('.modal-cancel-button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            closeAddRoundModal();
+            closeRulesModal();
+            document.getElementById('confirmModal').style.display = 'none';
+        });
+    });
+
+    document.getElementById('rulesModal').addEventListener('click', (e) => {
+        if (e.target.id === 'rulesModal') {
+            closeRulesModal();
         }
     });
 

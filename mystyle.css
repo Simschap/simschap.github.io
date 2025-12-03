@@ -794,8 +794,123 @@ input[type="number"] {
 }
 
 .page-footer a:hover {
-  color: var(--color-text);
-  text-decoration: underline;
+  color: var(--color-primary);
+}
+
+/* Rules Modal Styles - Visual Grid */
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.rules-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.rules-box {
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  background: var(--color-background-white);
+}
+
+.rules-box h3 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.1em;
+  border-bottom: 2px solid var(--color-border-light);
+  padding-bottom: var(--spacing-xs);
+}
+
+.card-list,
+.rules-list-ordered,
+.rules-list-simple {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: 4px;
+}
+
+.card {
+  font-size: 1.2em;
+  display: inline-block;
+  width: 1.2em;
+  text-align: center;
+}
+
+.card.red {
+  color: #e74c3c;
+}
+
+.card.black {
+  color: #2c3e50;
+}
+
+.suit-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.1em;
+}
+
+.rules-list-ordered {
+  counter-reset: rules-counter;
+}
+
+.rules-list-ordered li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 4px;
+}
+
+.rules-list-ordered li::before {
+  counter-increment: rules-counter;
+  content: counter(rules-counter) ".";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  color: var(--color-text-muted);
+}
+
+.simple-table {
+  width: 100%;
+}
+
+.simple-table td {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.simple-table td:last-child {
+  text-align: right;
+  font-weight: bold;
+}
+
+.rules-list-simple li {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+/* Ensure rules modal scrolls properly on mobile */
+#rulesModal .modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+  background: var(--color-background-lighter);
+}
+
+color: var(--color-text);
+text-decoration: underline;
 }
 
 /* Clickable rows */

@@ -75,6 +75,7 @@ export const CSV_CONFIG = {
 export const MODAL_CONFIG = {
   CONFIRM_MODAL_ID: 'confirmModal',
   ADD_ROUND_MODAL_ID: 'addRoundModal',
+  RULES_MODAL_ID: 'rulesModal',
   TOAST_CONTAINER_ID: 'toastContainer',
 };
 
@@ -108,6 +109,7 @@ export const ELEMENT_IDS = {
   RESET_GAME: 'resetGame',
   EXPORT_GAME: 'exportGame',
   IMPORT_GAME: 'importGame',
+  SHOW_RULES: 'showRules',
   CSV_FILE_INPUT: 'csvFileInput',
   CONFIRM_MESSAGE: 'confirmMessage',
   CONFIRM_YES: 'confirmYes',

@@ -45,6 +45,7 @@
       <button type="button" id="resetGame">Reset</button>
       <button type="button" id="exportGame">Export</button>
       <button type="button" id="importGame">Import</button>
+      <button type="button" id="showRules">Rules</button>
       <input type="file" id="csvFileInput" accept=".csv" style="display: none;" />
     </section>
 
@@ -98,6 +99,108 @@
       <div class="modal-footer">
         <button type="button" id="modalAddRound" class="modal-add-button">Add Round</button>
         <button type="button" class="modal-cancel-button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rules Cheat Sheet Modal -->
+  <div id="rulesModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Rules Cheat Sheet</h2>
+        <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body rules-content">
+        <div class="rules-grid">
+          <!-- Trumpf Column -->
+          <div class="rules-box">
+            <h3>Trumpf</h3>
+            <ul class="card-list">
+              <li><span class="card red">♥</span> 10 (Dulle)</li>
+              <li><span class="card black">♣</span> Dame (Alte)</li>
+              <li><span class="card black">♠</span> Dame</li>
+              <li><span class="card red">♥</span> Dame</li>
+              <li><span class="card red">♦</span> Dame</li>
+              <li><span class="card black">♣</span> Bube (Karlchen)</li>
+              <li><span class="card black">♠</span> Bube</li>
+              <li><span class="card red">♥</span> Bube</li>
+              <li><span class="card red">♦</span> Bube</li>
+              <li><span class="card red">♦</span> As (Fuchs)</li>
+              <li><span class="card red">♦</span> 10</li>
+              <li><span class="card red">♦</span> König</li>
+            </ul>
+          </div>
+
+          <!-- Middle Column (Fehl & Vorbehalte) -->
+          <div class="rules-column">
+            <div class="rules-box">
+              <h3>Fehl</h3>
+              <div class="suit-group">
+                <span class="card black">♣</span> As, 10, König
+              </div>
+              <div class="suit-group">
+                <span class="card black">♠</span> As, 10, König
+              </div>
+              <div class="suit-group">
+                <span class="card red">♥</span> As, 10, König
+              </div>
+            </div>
+
+            <div class="rules-box">
+              <h3>Vorbehalte (Reihenfolge)</h3>
+              <ol class="rules-list-ordered">
+                <li>Schmeißen</li>
+                <li>Trumpfabgabe</li>
+                <li>Hochzeit</li>
+                <li>Damensolo</li>
+                <li>Bubensolo</li>
+                <li>Fleischlos</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Right Column (Wertung & Punkte) -->
+          <div class="rules-column">
+            <div class="rules-box">
+              <h3>Wertung</h3>
+              <table class="rules-table simple-table">
+                <tr>
+                  <td>As</td>
+                  <td>11</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>König</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>Dame</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Bube</td>
+                  <td>2</td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="rules-box">
+              <h3>Spielpunkte</h3>
+              <ul class="rules-list-simple">
+                <li>1 PT pro keine 120, 90, 60, 30, 0</li>
+                <li>Karlchen (letzter Stich)</li>
+                <li>Fuchs gefangen</li>
+                <li>Gegen die Alten</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-cancel-button">Close</button>
       </div>
     </div>
   </div>

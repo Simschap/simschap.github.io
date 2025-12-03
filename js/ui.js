@@ -120,6 +120,16 @@ export function closeAddRoundModal() {
     modal.style.display = 'none';
 }
 
+export function openRulesModal() {
+    const modal = document.getElementById(MODAL_CONFIG.RULES_MODAL_ID);
+    modal.style.display = 'block';
+}
+
+export function closeRulesModal() {
+    const modal = document.getElementById(MODAL_CONFIG.RULES_MODAL_ID);
+    modal.style.display = 'none';
+}
+
 function buildModalWinnerButtons() {
     const modalWinnerButtonsContainer = document.getElementById(ELEMENT_IDS.MODAL_WINNER_BUTTONS_CONTAINER);
     const legend = modalWinnerButtonsContainer.querySelector('legend');
