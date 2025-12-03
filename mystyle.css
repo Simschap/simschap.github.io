@@ -758,9 +758,31 @@ input[type="number"] {
   border-bottom: 1px solid var(--color-border-light);
 }
 
-.graph-legend svg {
-  max-width: 100%;
-  height: auto;
+.legend-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  justify-content: center;
+  align-items: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-line {
+  display: inline-block;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.legend-text {
+  font-size: 14px;
+  color: var(--color-text);
+  white-space: nowrap;
 }
 
 .graph-scroll-container {
@@ -789,9 +811,13 @@ input[type="number"] {
     padding: var(--spacing-sm);
   }
 
-  .graph-legend svg {
-    width: 100%;
+  .legend-container {
+    gap: var(--spacing-sm);
     max-width: 350px;
+  }
+
+  .legend-item {
+    flex: 0 0 calc(50% - 8px);
   }
 
   .score-graph {

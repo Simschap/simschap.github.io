@@ -204,51 +204,15 @@ function renderLegend(gameState) {
     const legendContainer = document.getElementById('graphLegend');
     const colors = PLAYER_COLORS;
 
-    // Create compact legend SVG
-    const legendWidth = 400;
-    const legendHeight = 100;
-    const legendSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    legendSvg.setAttribute('width', legendWidth);
-    legendSvg.setAttribute('height', legendHeight);
-    legendSvg.setAttribute('viewBox', `0 0 ${legendWidth} ${legendHeight}`);
+    // Create HTML legend items
+    const legendItems = gameState.players.map((playerName, i) => {
+        return `
+            <div class="legend-item">
+                <span class="legend-line" style="background-color: ${colors[i]};"></span>
+                <span class="legend-text">${playerName}</span>
+            </div>
+        `;
+    }).join('');
 
-    const legendGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    legendGroup.setAttribute('class', 'legend');
-
-    // Arrange legend items in a 2x2 grid
-    const itemsPerRow = 2;
-    const itemWidth = legendWidth / itemsPerRow;
-    const itemHeight = legendHeight / 2;
-
-    for (let i = 0; i < GAME_CONFIG.MAX_PLAYERS; i++) {
-        const row = Math.floor(i / itemsPerRow);
-        const col = i % itemsPerRow;
-        const x = col * itemWidth + 20;
-        const y = row * itemHeight + itemHeight / 2;
-
-        // Legend line
-        const legendLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        legendLine.setAttribute('x1', x);
-        legendLine.setAttribute('y1', y);
-        legendLine.setAttribute('x2', x + 30);
-        legendLine.setAttribute('y2', y);
-        legendLine.setAttribute('stroke', colors[i]);
-        legendLine.setAttribute('stroke-width', GRAPH_CONFIG.LINE_WIDTH);
-        legendGroup.appendChild(legendLine);
-
-        // Legend text
-        const legendText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        legendText.setAttribute('x', x + 40);
-        legendText.setAttribute('y', y + 5);
-        legendText.setAttribute('font-size', '14');
-        legendText.setAttribute('fill', '#333');
-        legendText.textContent = gameState.players[i];
-        legendGroup.appendChild(legendText);
-    }
-
-    legendSvg.appendChild(legendGroup);
-
-    // Clear and add the legend
-    legendContainer.innerHTML = '';
-    legendContainer.appendChild(legendSvg);
+    legendContainer.innerHTML = `<div class="legend-container">${legendItems}</div>`;
 }
