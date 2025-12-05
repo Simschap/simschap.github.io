@@ -184,7 +184,6 @@ thead input:focus {
 }
 
 .form-section {
-  border-top: 2px solid var(--color-border-light);
   padding-top: var(--spacing-lg);
   margin-top: var(--spacing-lg);
 }
@@ -997,7 +996,6 @@ input[type="number"] {
   align-items: center;
   padding: var(--spacing-sm) 0;
   margin-bottom: var(--spacing-lg);
-  border-bottom: 1px solid var(--color-border-light);
 }
 
 .nav-left,
