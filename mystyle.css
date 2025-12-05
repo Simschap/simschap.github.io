@@ -175,6 +175,7 @@ thead input:focus {
   display: flex;
   gap: var(--spacing-md);
   flex-wrap: wrap;
+  justify-content: center;
   margin: var(--spacing-md) 0;
 }
 
@@ -191,12 +192,17 @@ thead input:focus {
 .points-control {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-sm);
 }
 
 .points-control input {
-  width: 60px;
+  width: 80px;
   text-align: center;
+  font-size: 1.2rem;
+  padding: var(--spacing-xs);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
 }
 
 tr.game-separator td {
@@ -982,4 +988,138 @@ input[type="number"] {
 .clickable-row td {
   position: relative;
   transition: background-color var(--transition);
+}
+
+/* Navigation Bar Styles */
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.nav-left,
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.nav-left {
+  justify-content: flex-start;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.nav-center {
+  flex: 2;
+  text-align: center;
+}
+
+.nav-center h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.nav-button {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: var(--spacing-sm);
+  font-size: 1.2rem;
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-button:hover {
+  background-color: var(--color-background-hover);
+}
+
+/* Rules Button Responsive Logic */
+.desktop-text {
+  display: inline;
+  font-weight: 500;
+}
+
+.mobile-icon {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .desktop-text {
+    display: none;
+  }
+
+  .mobile-icon {
+    display: inline;
+    font-size: 1.5rem;
+  }
+
+  .nav-center h1 {
+    font-size: 1.2rem;
+  }
+
+  .logo {
+    height: 1.5em;
+  }
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--color-background-white);
+  min-width: 160px;
+  box-shadow: var(--shadow-large);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border-light);
+  z-index: 1001;
+  padding: var(--spacing-xs) 0;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.dropdown-content button {
+  color: var(--color-text);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  margin: 0;
+  border-radius: 0;
+  font-size: 1rem;
+}
+
+.dropdown-content button:hover {
+  background-color: var(--color-background-hover);
+}
+
+/* Ensure burger menu button looks clickable */
+#burgerMenuBtn {
+  font-size: 1.5rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
 }

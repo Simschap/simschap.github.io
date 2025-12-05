@@ -35,6 +35,25 @@ export function initEvents() {
     document.getElementById('csvFileInput').addEventListener('change', handleCSVImport);
     document.getElementById('toggleGraph').addEventListener('click', toggleGraph);
 
+    // Burger Menu Toggle
+    const burgerBtn = document.getElementById('burgerMenuBtn');
+    const dropdown = document.getElementById('burgerMenuDropdown');
+
+    burgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const expanded = burgerBtn.getAttribute('aria-expanded') === 'true' || false;
+        burgerBtn.setAttribute('aria-expanded', !expanded);
+        dropdown.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!burgerBtn.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.remove('show');
+            burgerBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+
     // Modal events
     document.getElementById('modalAddRound').addEventListener('click', handleAddRoundFromModal);
 
