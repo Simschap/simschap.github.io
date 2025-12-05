@@ -46,6 +46,14 @@ export function initEvents() {
         dropdown.classList.toggle('show');
     });
 
+    // Close dropdown when an item is clicked
+    dropdown.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            dropdown.classList.remove('show');
+            burgerBtn.setAttribute('aria-expanded', 'false');
+        });
+    });
+
     // Close dropdown when clicking outside
     window.addEventListener('click', (e) => {
         if (!burgerBtn.contains(e.target) && !dropdown.contains(e.target)) {
