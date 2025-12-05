@@ -502,7 +502,7 @@ input[type="number"] {
     display: none;
   }
 
-  /* Ensure Nerd Mode header remains visible but maybe smaller or adjusted */
+  /* Ensure Statistics header remains visible but maybe smaller or adjusted */
   section:last-of-type h2 {
     display: flex;
     align-items: center;
