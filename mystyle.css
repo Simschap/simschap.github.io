@@ -730,6 +730,17 @@ input[type="number"] {
   transition: background-color 0.2s ease;
 }
 
+.header-toggle-button {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
 .toggle-button:hover {
   background-color: var(--color-background);
 }
