@@ -28,6 +28,7 @@ export function renderTable() {
     tbody.innerHTML = '';
     let totals = [0, 0, 0, 0];
     let roundCounter = 1;
+    let dealerCounter = 0; // Tracks non-solo rounds for dealer rotation
 
     gameState.rounds.forEach((round, index) => {
         let tr = document.createElement('tr');
@@ -37,11 +38,23 @@ export function renderTable() {
         let roundLabel = round.solo ? 'S' : roundCounter++;
         tr.dataset.label = roundLabel;
 
+        // Calculate dealer index for this round
+        const dealerIndex = dealerCounter % 4;
+
+        // Only advance dealer if it's NOT a solo round
+        if (!round.solo) {
+            dealerCounter++;
+        }
+
         let rowHtml = `<td>${roundLabel}</td>`;
         round.scores.forEach((score, i) => {
             totals[i] += score;
             let cls = score > 0 ? CSS_CLASSES.POSITIVE : score < 0 ? CSS_CLASSES.NEGATIVE : '';
-            rowHtml += `<td class='${cls}'>${totals[i]}</td>`;
+            // Add dealer shading
+            if (i === dealerIndex) {
+                cls += ' dealer-cell';
+            }
+            rowHtml += `<td class='${cls.trim()}'>${totals[i]}</td>`;
         });
 
         rowHtml += `<td>${round.points}</td>`;
@@ -54,21 +67,48 @@ export function renderTable() {
         tbody.appendChild(tr);
     });
 
+    // If no rounds, show an empty row for Round 1 (from previous task)
+    if (gameState.rounds.length === 0) {
+        let tr = document.createElement('tr');
+        tr.className = 'clickable-row';
+        tr.dataset.label = '1';
+
+        let rowHtml = `<td>1</td>`;
+        for (let i = 0; i < 4; i++) {
+            rowHtml += `<td></td>`;
+        }
+        rowHtml += `<td></td>`;
+
+        tr.innerHTML = rowHtml;
+        tbody.appendChild(tr);
+    }
+
+    // Add Next Dealer Row
+    // dealerCounter now holds the count of past non-solo rounds, 
+    // so dealerCounter % 4 is the dealer for the NEXT round (or current if we are at start).
+    const nextDealerIndex = dealerCounter % 4;
+
+    const dealerRow = document.createElement('tr');
+    dealerRow.className = 'next-dealer-row';
+    // Use an icon or text indicating "Next Dealer" in the first column? 
+    // "empty row... which has all cells empty except for the one related to the dealer [with logo]"
+    // First column is usually round number. Leaving it empty or using a small label is good.
+    let dealerRowHtml = `<td><span style="font-size:0.8em; color:var(--color-text-light);">Dealer</span></td>`;
+
+    for (let i = 0; i < 4; i++) {
+        dealerRowHtml += `<td>`;
+        if (i === nextDealerIndex) {
+            dealerRowHtml += `<img src="logo.svg" alt="Dealer" class="dealer-icon" />`;
+        }
+        dealerRowHtml += `</td>`;
+    }
+    dealerRowHtml += `<td></td>`; // Empty points cell
+    dealerRow.innerHTML = dealerRowHtml;
+    tbody.appendChild(dealerRow);
+
     const addRow = document.createElement('tr');
     addRow.className = CSS_CLASSES.ADD_ROUND_ROW;
-
-    if (gameState.rounds.length === 0) {
-        addRow.innerHTML = `
-      <td colspan="7" class="${CSS_CLASSES.EMPTY_STATE}">
-        <div class="${CSS_CLASSES.EMPTY_MESSAGE}">
-          <p>No rounds yet. Click the button below to start your first round!</p>
-          <button data-action="open-add-round" aria-label="Add new round" class="${CSS_CLASSES.ADD_ROUND_BUTTON}">Add Round</button>
-        </div>
-      </td>
-    `;
-    } else {
-        addRow.innerHTML = `<td colspan="7"><button data-action="open-add-round" aria-label="Add new round" class="${CSS_CLASSES.ADD_ROUND_BUTTON}">Add Round</button></td>`;
-    }
+    addRow.innerHTML = `<td colspan="7"><button data-action="open-add-round" aria-label="Add new round" class="${CSS_CLASSES.ADD_ROUND_BUTTON}">Add Round</button></td>`;
 
     tbody.appendChild(addRow);
 }

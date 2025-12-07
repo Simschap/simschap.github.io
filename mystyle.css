@@ -1132,3 +1132,24 @@ input[type="number"] {
   font-size: 1.5rem;
   padding: var(--spacing-xs) var(--spacing-sm);
 }
+
+/* Dealer Visualization */
+.dealer-cell {
+  background-color: #e0e0e0 !important;
+  /* Slightly darker grey */
+}
+
+.dealer-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  opacity: 0.7;
+}
+
+/* Row for the next dealer indicator */
+.next-dealer-row td {
+  border-top: 2px solid var(--color-border);
+  /* Separator */
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
