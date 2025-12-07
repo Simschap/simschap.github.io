@@ -14,12 +14,12 @@ export function showToast(message, type = 'error', duration = 4000) {
   toast.textContent = message;
   toast.setAttribute('role', 'alert');
   toast.setAttribute('aria-live', 'polite');
-  
+
   container.appendChild(toast);
-  
+
   // Trigger animation
   setTimeout(() => toast.classList.add('show'), 100);
-  
+
   // Auto remove
   setTimeout(() => {
     toast.classList.remove('show');
@@ -37,22 +37,22 @@ export function showConfirm(message, onConfirm) {
   const messageEl = document.getElementById('confirmMessage');
   const yesBtn = document.getElementById('confirmYes');
   const noBtn = document.getElementById('confirmNo');
-  
+
   messageEl.textContent = message;
   modal.style.display = 'block';
-  
+
   // Remove existing listeners
   const newYesBtn = yesBtn.cloneNode(true);
   const newNoBtn = noBtn.cloneNode(true);
   yesBtn.parentNode.replaceChild(newYesBtn, yesBtn);
   noBtn.parentNode.replaceChild(newNoBtn, noBtn);
-  
+
   // Add new listeners
   newYesBtn.addEventListener('click', () => {
     modal.style.display = 'none';
     onConfirm();
   });
-  
+
   newNoBtn.addEventListener('click', () => {
     modal.style.display = 'none';
   });
@@ -78,7 +78,7 @@ export function parseCSV(csvText) {
 
   // Extract player names from header (columns 1-4)
   const playerNames = header.slice(1, 5);
-  
+
   // Parse data rows
   const rounds = [];
   for (let i = 1; i < lines.length; i++) {
@@ -90,7 +90,7 @@ export function parseCSV(csvText) {
     // Parse round label
     const roundLabel = row[0].trim();
     const isSolo = roundLabel === 'S';
-    
+
     // Parse cumulative scores (columns 1-4)
     const cumulativeScores = [];
     for (let j = 1; j <= 4; j++) {
@@ -149,7 +149,7 @@ export function validateImportedData(parsedData) {
   // Validate rounds data
   for (let i = 0; i < rounds.length; i++) {
     const round = rounds[i];
-    
+
     // Check if round scores make sense (should be multiples of points)
     for (let j = 0; j < 4; j++) {
       const score = round.roundScores[j];
@@ -204,19 +204,19 @@ export function exportGame(gameState) {
 
   // Generate descriptive filename with date, time, and player names
   const now = new Date();
-  const dateString = now.getFullYear().toString() + 
-                    (now.getMonth() + 1).toString().padStart(2, '0') + 
-                    now.getDate().toString().padStart(2, '0');
-  
-  const timeString = now.getHours().toString().padStart(2, '0') + 
-                    now.getMinutes().toString().padStart(2, '0') + 
-                    now.getSeconds().toString().padStart(2, '0');
-  
+  const dateString = now.getFullYear().toString() +
+    (now.getMonth() + 1).toString().padStart(2, '0') +
+    now.getDate().toString().padStart(2, '0');
+
+  const timeString = now.getHours().toString().padStart(2, '0') +
+    now.getMinutes().toString().padStart(2, '0') +
+    now.getSeconds().toString().padStart(2, '0');
+
   // Create player names string, replacing spaces with underscores
-  const playerNames = gameState.players.map(name => 
+  const playerNames = gameState.players.map(name =>
     name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '')
   ).join('-');
-  
+
   const filename = `${dateString}-${timeString}-${playerNames}.csv`;
 
   // Create downloadable CSV file
@@ -225,7 +225,13 @@ export function exportGame(gameState) {
   let a = document.createElement("a");
   a.href = url;
   a.download = filename;
+
+  // Append to body to ensure it works on iOS/Firefox
+  document.body.appendChild(a);
   a.click();
+
+  // cleanup
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 
