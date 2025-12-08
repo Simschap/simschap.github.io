@@ -956,6 +956,23 @@ input[type="number"] {
   color: var(--color-text-muted);
 }
 
+.rules-list-ordered ul {
+  list-style-type: disc;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  padding-left: 1.5rem;
+}
+
+.rules-list-ordered ul li {
+  padding-left: 0;
+  margin-bottom: 0.25rem;
+}
+
+.rules-list-ordered ul li::before {
+  content: none;
+  counter-increment: none;
+}
+
 .simple-table {
   width: 100%;
 }
