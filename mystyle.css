@@ -147,6 +147,7 @@ button {
   border: 1px solid #aaa;
   border-radius: var(--border-radius);
   background: var(--color-background-white);
+  color: var(--color-text);
   cursor: pointer;
   margin-right: var(--spacing-sm);
   transition: background-color var(--transition);
