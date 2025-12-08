@@ -211,9 +211,8 @@ function handleCSVImport(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    event.target.value = '';
-
     const reader = new FileReader();
+
     reader.onload = function (e) {
         try {
             const csvText = e.target.result;
@@ -227,6 +226,10 @@ function handleCSVImport(event) {
 
     reader.onerror = function () {
         showToast('Error reading file. Please try again.', 'error');
+    };
+
+    reader.onloadend = function () {
+        event.target.value = '';
     };
 
     reader.readAsText(file);
